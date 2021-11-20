@@ -3,48 +3,69 @@ package no.hvl.dat100.jplab11.oppgave3;
 import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave1.*;
 
+import java.util.ArrayList;
+
 public class Blogg {
 
-	// TODO: objektvariable 
-
+	// TODO: objektvariable
+	private final Innlegg[] samling;
+	private int antall;
+	private String str;
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		samling = new Innlegg[20];
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		samling = new Innlegg[lengde];
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return antall;
 	}
-	
+
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		return samling;
 	}
-	
-	public int finnInnlegg(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+	public int finnInnlegg(Innlegg innlegg) {
+		for (int i =0;  i < samling.length; i++) {
+			if (samling[i]==innlegg)
+				return i;
+		}
+		return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i =0;  i < samling.length; i++) {
+			if (samling[i]==innlegg)
+				return true;
+		}
+		return false;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		return antall < samling.length;
 	}
+
+
 	
 	public boolean leggTil(Innlegg innlegg) {
+		if(ledigPlass()){
+			samling[antall] = innlegg;
+			antall++;
+			return true;
+		}
+		return false;
 
-		throw new UnsupportedOperationException(TODO.method());
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		str = Integer.toString(antall)+"\n";
+		for (int i = 0; i < antall; i++) {
+			str += samling[i].toString();
+		}
+		return str;
+
 	}
 
 	// valgfrie oppgaver nedenfor
@@ -60,8 +81,14 @@ public class Blogg {
 	}
 	
 	public boolean slett(Innlegg innlegg) {
-		
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i =0;  i < samling.length; i++) {
+			if (samling[i]==innlegg) {
+				samling[i] = null;
+				antall--;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public int[] search(String keyword) {
